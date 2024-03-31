@@ -1,0 +1,45 @@
+Git Commit Notes:
+
+1. Check Status:
+   - Before making any commits, always check the status of your repository to see which files have been modified, added, or deleted.
+   git status
+
+2. Add Changes:
+   - Use 'git add' to stage changes for commit. You can add specific files or directories, or use 'git add .' to add all changes.
+   git add <file/directory>
+   git add .
+
+3. Commit Changes:
+   - Once changes are staged, commit them using 'git commit'. Include a descriptive message summarizing the changes made.
+   git commit -m "Your commit message here"
+
+4. Verify Commit:
+   - After committing, verify the commit was successful and check the commit history if needed.
+   git log
+
+5. Push Changes (if working with remote repository):
+   - If your repository is connected to a remote (e.g., GitHub), push your commits to the remote repository to share your changes.
+   git push origin <branch>
+
+6. Update Remote Branch (if needed):
+   - If you're working on a branch and want to update the remote branch with your local commits, push to the remote branch.
+   git push origin <branch>
+
+7. Pull Changes (if needed):
+   - If you're collaborating with others and changes have been made to the remote repository, pull those changes to update your local repository.
+   git pull origin <branch>
+
+8. Resolve Conflicts (if any):
+   - If there are conflicts between your local changes and remote changes, resolve them before proceeding.
+
+9. Review Changes (optional):
+   - Before pushing changes, review them to ensure everything looks correct.
+
+10. Repeat as Needed:
+    - Continue making changes, adding them, committing them, and pushing/pulling as needed in your workflow.
+
+Remember to follow best practices for commit messages:
+- Keep messages concise but descriptive.
+- Start with a capitalized verb (e.g., "Update", "Fix", "Add").
+- Use the imperative mood (e.g., "Fix typo" instead of "Fixed typo").
+- Provide context and explain why the change was made.
