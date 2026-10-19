@@ -69,6 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
     modalBackdrop.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 
+    // Security: Record open timestamp for time-lock protection
+    const tsInput = document.getElementById('formTimestamp');
+    if (tsInput && (!tsInput.value || tsInput.value === '')) {
+      tsInput.value = Date.now();
+    }
+
     // Focus the first input
     const firstInput = document.getElementById('inputName');
     if (firstInput) {

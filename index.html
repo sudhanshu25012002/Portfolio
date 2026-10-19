@@ -10,9 +10,11 @@
   <meta name="description"
     content="Sudhanshu Ranjan — Software Engineer specializing in Python/Django backend systems &amp; Content Creator hosting on Community Radio 90.8 FM.">
 
-  <!-- Favicon: Workstation Monogram -->
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d6d4ce'/><rect x='4' y='4' width='92' height='92' fill='%23000080'/><text x='50%' y='62%' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='42' font-weight='900' fill='%23ffffff'>SR</text></svg>">
+  <!-- Favicon: Sudhanshu Ranjan Photo -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png?v=3">
+  <link rel="icon" type="image/jpeg" href="assets/img/profile-img.jpg?v=3">
+  <link rel="shortcut icon" href="favicon.ico?v=3">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png?v=3">
 
   <!-- Typography: JetBrains Mono + Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +53,7 @@
             <button type="button" class="win-btn win-min" title="Minimize">▲</button>
             <button type="button" class="win-btn win-max" title="Maximize">▼</button>
           </div>
+          <img src="assets/img/profile-img.jpg" alt="Sudhanshu Ranjan Logo" class="titlebar-avatar-logo">
           <span class="titlebar-title">Sudhanshu_Ranjan.sys — Workstation Link [v2026.4]</span>
         </div>
         <div class="titlebar-right">
@@ -109,6 +112,7 @@
             <button type="button" class="win-btn win-min" title="Minimize">▲</button>
             <button type="button" class="win-btn win-max" title="Maximize">▼</button>
           </div>
+          <img src="assets/img/profile-img.jpg" alt="Sudhanshu Ranjan Logo" class="titlebar-avatar-logo">
           <span class="titlebar-title">About_Sudhanshu.txt — Developer &amp; Broadcaster Dossier</span>
         </div>
         <div class="titlebar-right">
@@ -123,15 +127,20 @@
         <!-- Identity Header Box -->
         <div class="about-identity-header">
           <div class="identity-tag">
-            <div class="id-symbol-box">SR</div>
+            <div class="id-photo-frame">
+              <img src="assets/img/profile-img.jpg" alt="Sudhanshu Ranjan" class="id-photo-logo">
+            </div>
             <div>
               <h2 class="about-name">Sudhanshu Ranjan</h2>
               <span class="about-tagline">Software Engineer &amp; Content Creator</span>
             </div>
           </div>
-          <div class="id-badge-pill">
-            <span class="lamp-emerald"></span>
-            <span>AVAILABLE FOR BACKEND ARCHITECTURE &amp; MEDIA DIRECTION</span>
+          <div class="about-links-row">
+            <a href="https://www.linkedin.com/in/sr25012002/" target="_blank" rel="noopener noreferrer" class="retro-badge-link" title="View LinkedIn Profile">
+              <i class='bx bxl-linkedin-square'></i>
+              <span>linkedin.com/in/sr25012002</span>
+              <i class='bx bx-up-arrow-alt rotate-45'></i>
+            </a>
           </div>
         </div>
 
@@ -222,6 +231,7 @@
           <div class="retro-win-controls">
             <button type="button" class="win-btn win-close" id="modalCloseXBtn" title="Close Dialog">✕</button>
           </div>
+          <img src="assets/img/profile-img.jpg" alt="Sudhanshu Ranjan Logo" class="titlebar-avatar-logo">
           <span class="titlebar-title" id="modalTitle">COMM_DISPATCH.EXE — Direct Handshake Terminal</span>
         </div>
         <div class="titlebar-right">
@@ -237,6 +247,16 @@
         <div id="modalAlertBox" class="retro-alert-box" style="display: none;" role="alert"></div>
 
         <form id="directConnectForm" novalidate>
+          <!-- Security Layer: Anti-Bot Honeypot Trap (invisible to humans) -->
+          <div style="opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1; overflow: hidden;" aria-hidden="true">
+            <label for="inputWebsite">Leave this field blank</label>
+            <input type="text" id="inputWebsite" name="website_url" tabindex="-1" autocomplete="off" value="">
+          </div>
+
+          <!-- Security Layer: Dynamic Handshake Timestamp & Token -->
+          <input type="hidden" id="formTimestamp" name="form_time" value="">
+          <input type="hidden" id="formSecurityKey" name="sec_key" value="">
+
           <div class="retro-form-grid">
             
             <!-- Full Name -->
@@ -308,7 +328,7 @@
       
       <!-- Start Button (Quick Contact Launch) -->
       <button type="button" class="btn-retro-start" id="taskbarStartBtn">
-        <span class="start-icon">■</span>
+        <img src="assets/img/profile-img.jpg" alt="SR" class="start-photo-logo">
         <strong>CONNECT</strong>
       </button>
 

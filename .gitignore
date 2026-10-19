@@ -18,4 +18,5 @@ Thumbs.db
 # Logs & Inquiry Data
 *.log
 inquiries.json
+rate_limits.json
 

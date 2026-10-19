@@ -177,6 +177,17 @@ button {
   border-color: var(--c-win-shadow) var(--c-win-light) var(--c-win-light) var(--c-win-shadow);
 }
 
+.titlebar-avatar-logo {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .titlebar-right {
   display: flex;
   align-items: center;
@@ -432,9 +443,10 @@ button {
   gap: 1rem;
 }
 
-.id-symbol-box {
-  width: 48px;
-  height: 48px;
+.id-symbol-box,
+.id-photo-frame {
+  width: 52px;
+  height: 52px;
   background-color: var(--c-titlebar-start);
   color: #ffffff;
   border: 2px solid var(--c-win-light);
@@ -446,6 +458,52 @@ button {
   font-family: var(--f-mono);
   font-weight: 900;
   font-size: 1.25rem;
+  overflow: hidden;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.id-photo-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-links-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.retro-badge-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: var(--c-win-inset);
+  color: #000080;
+  border: 2px solid var(--c-win-light);
+  border-right-color: var(--c-win-shadow);
+  border-bottom-color: var(--c-win-shadow);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.retro-badge-link:hover {
+  background-color: var(--c-titlebar-start);
+  color: #ffffff;
+  border-color: #6c8cd5 #000040 #000040 #6c8cd5;
+}
+
+.retro-badge-link:active {
+  border-color: var(--c-win-shadow) var(--c-win-light) var(--c-win-light) var(--c-win-shadow);
+  transform: translate(1px, 1px);
+}
+
+.retro-badge-link i.bxl-linkedin-square {
+  font-size: 1rem;
 }
 
 .about-name {
@@ -940,6 +998,16 @@ button {
 
 .start-icon {
   color: var(--c-amber);
+}
+
+.start-photo-logo {
+  width: 17px;
+  height: 17px;
+  object-fit: cover;
+  border: 1px solid var(--c-win-dark);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  display: inline-block;
 }
 
 .taskbar-tasks {

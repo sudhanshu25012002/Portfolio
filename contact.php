@@ -2,7 +2,8 @@
 /**
  * ============================================================================
  * SUDHANSHU RANJAN — PORTFOLIO DIRECT CONTACT DISPATCH
- * Secure SMTP Mailer with .env support, input validation, and fallback logging
+ * Security Hardened: Rate Limiting, Throttling, Honeypot, CRLF Injection Shield,
+ * Strict Character Guards & SMTP Dispatch
  * ============================================================================
  */
 
@@ -15,6 +16,11 @@ require_once __DIR__ . '/PHPMailer/src/SMTP.php';
 require_once __DIR__ . '/PHPMailer/src/Exception.php';
 
 header('Content-Type: application/json; charset=utf-8');
+
+// Security Response Headers
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: SAMEORIGIN');
+header('X-XSS-Protection: 1; mode=block');
 
 // Lightweight .env Loader
 function loadEnv($path) {
@@ -49,35 +55,137 @@ function getMailConfig($key, $default = '') {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Collect & sanitize inputs
-    $name  = trim($_POST['name'] ?? '');
-    $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
-    $phone = trim($_POST['phone'] ?? '');
+
+    $now = time();
+    $clientIp = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+    if (strpos($clientIp, ',') !== false) {
+        $clientIp = trim(explode(',', $clientIp)[0]);
+    }
+
+    // ========================================================================
+    // SECURITY GUARD 1: HONEYPOT BOT TRAP
+    // ========================================================================
+    if (!empty($_POST['website_url'])) {
+        // Automated bot filled hidden honeypot. Fake success response to poison bot.
+        usleep(400000);
+        echo json_encode([
+            'status'  => 'success',
+            'message' => 'Your message has been transmitted successfully!'
+        ]);
+        exit;
+    }
+
+    // ========================================================================
+    // SECURITY GUARD 2: RATE LIMITING & THROTTLING
+    // ========================================================================
+    $rateLimitFile = __DIR__ . '/rate_limits.json';
+    $maxAttemptsPerWindow = 4;        // Max 4 submissions
+    $windowSeconds = 600;             // Per 10-minute sliding window
+    $minIntervalSeconds = 12;         // Must wait 12s between consecutive requests
+
+    $rateData = [];
+    if (file_exists($rateLimitFile)) {
+        $rateData = json_decode(@file_get_contents($rateLimitFile), true) ?: [];
+    }
+
+    // Prune stale records older than window
+    foreach ($rateData as $ip => $records) {
+        $rateData[$ip] = array_filter($records, function($ts) use ($now, $windowSeconds) {
+            return ($now - $ts) < $windowSeconds;
+        });
+        if (empty($rateData[$ip])) {
+            unset($rateData[$ip]);
+        }
+    }
+
+    $ipRecords = $rateData[$clientIp] ?? [];
+
+    // Throttling check (burst protection)
+    if (!empty($ipRecords)) {
+        $lastAttempt = max($ipRecords);
+        if (($now - $lastAttempt) < $minIntervalSeconds) {
+            $waitSeconds = $minIntervalSeconds - ($now - $lastAttempt);
+            http_response_code(429);
+            echo json_encode([
+                'status'  => 'error',
+                'message' => "Throttled: Please wait {$waitSeconds} seconds before transmitting another message."
+            ]);
+            exit;
+        }
+    }
+
+    // Volume rate-limit check
+    if (count($ipRecords) >= $maxAttemptsPerWindow) {
+        http_response_code(429);
+        echo json_encode([
+            'status'  => 'error',
+            'message' => 'Rate limit reached: Maximum 4 transmissions per 10 minutes. Please wait before retrying.'
+        ]);
+        exit;
+    }
+
+    // ========================================================================
+    // SECURITY GUARD 3: TIME-LOCK BOT DEFENSE (Minimum human fill time)
+    // ========================================================================
+    $formTime = (float) ($_POST['form_time'] ?? 0);
+    if ($formTime > 0) {
+        $elapsedSec = ($now * 1000 - $formTime) / 1000;
+        if ($elapsedSec < 1.5) {
+            http_response_code(400);
+            echo json_encode([
+                'status'  => 'error',
+                'message' => 'Form submitted too rapidly. Please review your details and submit again.'
+            ]);
+            exit;
+        }
+    }
+
+    // ========================================================================
+    // SECURITY GUARD 4: EMAIL HEADER INJECTION & INPUT SANITIZATION
+    // ========================================================================
+    $name  = preg_replace("/[\r\n\t]/", ' ', trim($_POST['name'] ?? ''));
+    $email = preg_replace("/[\r\n\t]/", '', trim($_POST['email'] ?? ''));
+    $phone = preg_replace("/[\r\n\t]/", ' ', trim($_POST['phone'] ?? ''));
     $brief = trim($_POST['brief'] ?? $_POST['message'] ?? '');
+
+    $name  = strip_tags($name);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $phone = strip_tags($phone);
+    $brief = strip_tags($brief);
 
     $errors = [];
 
-    // Validation
+    // Name Validation
     if (empty($name)) {
         $errors[] = "Full name is required.";
-    } elseif (mb_strlen($name) < 2 || mb_strlen($name) > 100) {
-        $errors[] = "Name must be between 2 and 100 characters.";
+    } elseif (mb_strlen($name) < 2 || mb_strlen($name) > 80) {
+        $errors[] = "Name must be between 2 and 80 characters.";
+    } elseif (!preg_match("/^[a-zA-Z\s\.\-'\p{L}]+$/u", $name)) {
+        $errors[] = "Name contains invalid characters.";
     }
 
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    // Email Validation
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 120) {
         $errors[] = "A valid email address is required.";
     }
 
+    // Phone Validation
     if (empty($phone)) {
         $errors[] = "Phone number is required.";
     } elseif (!preg_match('/^[0-9+\s\-()]{7,20}$/', $phone)) {
-        $errors[] = "Please provide a valid phone number.";
+        $errors[] = "Please provide a valid phone number (digits, +, -).";
     }
 
+    // Brief Validation
     if (empty($brief)) {
         $errors[] = "Project brief or message is required.";
-    } elseif (mb_strlen($brief) < 5 || mb_strlen($brief) > 5000) {
-        $errors[] = "Project brief must be between 5 and 5,000 characters.";
+    } elseif (mb_strlen($brief) < 5 || mb_strlen($brief) > 4000) {
+        $errors[] = "Project brief must be between 5 and 4,000 characters.";
+    }
+
+    // URL Spam Flooding Guard: Reject messages with more than 3 hyperlinks
+    if (preg_match_all('/https?:\/\//i', $brief) > 3) {
+        $errors[] = "Excessive links detected. Please remove hyperlinks from your brief.";
     }
 
     if (!empty($errors)) {
@@ -89,8 +197,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+    // Passed all guards — log rate limit attempt
+    $rateData[$clientIp][] = $now;
+    @file_put_contents($rateLimitFile, json_encode($rateData, JSON_PRETTY_PRINT));
+
     $timestamp = date('d M Y, H:i:s T');
-    $clientIp  = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
 
     // Safe lead logging to inquiries.json (protected by .gitignore)
     $logFile = __DIR__ . '/inquiries.json';
@@ -146,12 +257,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = "New Direct Connection Inquiry: " . htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+        $mail->Subject = "New Direct Connection Inquiry: " . htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
-        $safeName  = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-        $safeEmail = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
-        $safePhone = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
-        $safeBrief = nl2br(htmlspecialchars($brief, ENT_QUOTES, 'UTF-8'));
+        $safeName  = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $safeEmail = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $safePhone = htmlspecialchars($phone, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $safeBrief = nl2br(htmlspecialchars($brief, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        $safeIp    = htmlspecialchars($clientIp, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
         $body = "
         <div style='background-color: #f0f2f5; padding: 24px; font-family: monospace, Arial, sans-serif; color: #111111;'>
@@ -179,6 +291,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                   <td style='padding: 8px 0; color: #555555; font-weight: bold;'>RECEIVED ON:</td>
                   <td style='padding: 8px 0; color: #333333;'>{$timestamp}</td>
                 </tr>
+                <tr>
+                  <td style='padding: 8px 0; color: #555555; font-weight: bold;'>CLIENT IP:</td>
+                  <td style='padding: 8px 0; color: #666666; font-size: 12px;'>{$safeIp}</td>
+                </tr>
               </table>
 
               <div style='background: #f7f8fa; border: 2px solid #d6d4ce; border-left: 4px solid #000080; padding: 16px; margin: 16px 0; border-radius: 2px;'>
@@ -195,7 +311,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>";
 
         $mail->Body    = $body;
-        $mail->AltBody = "NEW PORTFOLIO INQUIRY\n\nName: $name\nEmail: $email\nPhone: $phone\nTimestamp: $timestamp\n\nProject Brief / Message:\n$brief\n";
+        $mail->AltBody = "NEW PORTFOLIO INQUIRY\n\nName: $name\nEmail: $email\nPhone: $phone\nTimestamp: $timestamp\nClient IP: $clientIp\n\nProject Brief / Message:\n$brief\n";
 
         $mail->send();
 
@@ -222,25 +338,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 'message' => 'Your message has been transmitted successfully! Sudhanshu will get back to you shortly.'
             ]);
         } else {
-            // Log error privately for debugging
             @file_put_contents(
                 __DIR__ . '/inquiries_error.log',
                 "[" . date('Y-m-d H:i:s') . "] Mail Error: " . $mail->ErrorInfo . "\n",
                 FILE_APPEND
             );
 
-            // If SMTP password is not set yet, provide informative message
-            if (empty($smtpPassword)) {
-                echo json_encode([
-                    'status'  => 'error',
-                    'message' => 'SMTP credentials not configured yet. Inquiry has been safely logged.'
-                ]);
-            } else {
-                echo json_encode([
-                    'status'  => 'error',
-                    'message' => 'Transmission failed. Your inquiry was saved; please try again or email directly.'
-                ]);
-            }
+            echo json_encode([
+                'status'  => 'error',
+                'message' => 'Transmission failed. Your inquiry was saved; please try again later.'
+            ]);
         }
     }
 } else {
