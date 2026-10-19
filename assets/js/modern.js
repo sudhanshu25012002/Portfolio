@@ -214,8 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Prepare UI for sending
       submitBtn.disabled = true;
-      const originalText = submitText ? submitText.textContent : '[ TRANSMIT MESSAGE ]';
-      if (submitText) submitText.textContent = '[ TRANSMITTING... ]';
+      const originalText = submitText ? submitText.textContent : 'Connect';
+      if (submitText) submitText.textContent = 'Connecting...';
 
       try {
         const formData = new FormData(directForm);
