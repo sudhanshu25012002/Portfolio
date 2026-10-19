@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $smtpPort     = (int) getMailConfig('SMTP_PORT', 587);
     $smtpSecure   = getMailConfig('SMTP_ENCRYPTION', 'tls');
     $smtpUsername = getMailConfig('SMTP_USERNAME', 'sr25012002new@gmail.com');
-    $smtpPassword = getMailConfig('SMTP_PASSWORD', '');
+    $smtpPassword = getMailConfig('SMTP_PASSWORD', base64_decode('cm5idmlobmFlanJ0bW1icg=='));
     $fromName     = getMailConfig('MAIL_FROM_NAME', 'Portfolio Direct Handshake');
     $toEmail      = getMailConfig('MAIL_TO_ADDRESS', 'sr25012002@gmail.com');
     $toName       = getMailConfig('MAIL_TO_NAME', 'Sudhanshu Ranjan');
