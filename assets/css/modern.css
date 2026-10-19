@@ -1,0 +1,1075 @@
+/**
+ * ============================================================================
+ * SUDHANSHU RANJAN — PORTFOLIO 2026
+ * Style: Retro-Artisan Workstation (NeXTSTEP / 90s UNIX Chrome)
+ * Palette: Workstation Platinum (#d6d4ce), Navy Cobalt (#000080), 
+ *          Amber Phosphor (#ff9900 / #ffb000), Deep Desk Slate (#242933)
+ * ============================================================================
+ */
+
+/* --------------------------------------------------------------------------
+   01. DESIGN TOKENS & WORKSTATION CONSTANTS
+   -------------------------------------------------------------------------- */
+:root {
+  /* Physical Beveled Palette */
+  --c-desk-bg: #242933;
+  --c-win-face: #d6d4ce;
+  --c-win-inset: #c4c2bc;
+  --c-win-light: #ffffff;
+  --c-win-shadow: #7a7872;
+  --c-win-darkshadow: #1c1a16;
+
+  /* Classic Titlebars */
+  --c-titlebar-start: #000080;
+  --c-titlebar-end: #1084d0;
+  --c-titlebar-sec-start: #232b38;
+  --c-titlebar-sec-end: #3b465a;
+
+  /* Phosphor & Signal Accents */
+  --c-amber: #ff9900;
+  --c-amber-glow: #ffb000;
+  --c-emerald: #00e676;
+  --c-cobalt: #000080;
+  --c-error: #d32f2f;
+
+  /* Typography */
+  --c-text-main: #000000;
+  --c-text-muted: #4a4a4a;
+  --c-text-white: #ffffff;
+
+  --f-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+  --f-heading: 'Space Grotesk', -apple-system, sans-serif;
+  --f-pixel: 'VT323', monospace;
+
+  --max-w-content: 1040px;
+}
+
+/* --------------------------------------------------------------------------
+   02. RESET & WORKSTATION DESKTOP BASE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--c-desk-bg);
+  color: var(--c-text-main);
+}
+
+body.workstation-body {
+  font-family: var(--f-mono);
+  background-color: var(--c-desk-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 76px; /* Space for bottom taskbar */
+}
+
+/* Background Stipple / Matrix Texture */
+.workstation-canvas-bg {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+  background-size: 20px 20px, 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.workstation-workspace {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-w-content);
+  margin: 0 auto;
+  padding: 2.75rem 1.25rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+::selection {
+  background-color: var(--c-titlebar-start);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   03. 3D BEVELED WINDOW FRAMES (NeXTSTEP CHROME)
+   -------------------------------------------------------------------------- */
+.retro-window-frame {
+  background-color: var(--c-win-face);
+  border: 3px solid var(--c-win-light);
+  border-right-color: var(--c-win-shadow);
+  border-bottom-color: var(--c-win-shadow);
+  box-shadow: 
+    2px 2px 0px var(--c-win-darkshadow),
+    6px 6px 18px rgba(0, 0, 0, 0.45);
+  position: relative;
+}
+
+/* Classic Titlebar */
+.retro-titlebar {
+  background: linear-gradient(90deg, var(--c-titlebar-start) 0%, var(--c-titlebar-end) 100%);
+  color: #ffffff;
+  padding: 0.4rem 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  user-select: none;
+  border-bottom: 2px solid var(--c-win-shadow);
+}
+
+.retro-titlebar.secondary-titlebar {
+  background: linear-gradient(90deg, var(--c-titlebar-sec-start) 0%, var(--c-titlebar-sec-end) 100%);
+}
+
+.titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.retro-win-controls {
+  display: flex;
+  gap: 3px;
+}
+
+.win-btn {
+  width: 17px;
+  height: 17px;
+  background-color: var(--c-win-face);
+  color: #000000;
+  border: 1px solid var(--c-win-light);
+  border-right-color: var(--c-win-shadow);
+  border-bottom-color: var(--c-win-shadow);
+  font-size: 0.5625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.win-btn:active {
+  border-color: var(--c-win-shadow) var(--c-win-light) var(--c-win-light) var(--c-win-shadow);
+}
+
+.titlebar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.5px;
+}
+
+.titlebar-lamp {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--c-emerald);
+  box-shadow: 0 0 6px var(--c-emerald);
+}
+
+/* Menubar */
+.retro-menubar {
+  background-color: var(--c-win-face);
+  border-bottom: 2px solid var(--c-win-shadow);
+  padding: 0.35rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.menubar-items {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.menu-item {
+  color: #000000;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.menu-item:hover, .menu-item.active {
+  background-color: var(--c-titlebar-start);
+  color: #ffffff;
+}
+
+.menu-item.link-btn {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.live-clock-badge {
+  font-family: var(--f-pixel);
+  font-size: 1.15rem;
+  background-color: #000000;
+  color: var(--c-amber-glow);
+  padding: 0.15rem 0.5rem;
+  border: 1px inset var(--c-win-shadow);
+  letter-spacing: 1px;
+}
+
+/* Window Body Content */
+.retro-window-body {
+  padding: 2.5rem 2.25rem;
+}
+
+/* Window Status Bar */
+.retro-statusbar {
+  background-color: var(--c-win-inset);
+  border-top: 2px solid var(--c-win-shadow);
+  padding: 0.3rem 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #333333;
+}
+
+.status-cell {
+  border: 1px inset var(--c-win-light);
+  border-color: var(--c-win-shadow) var(--c-win-light) var(--c-win-light) var(--c-win-shadow);
+  padding: 0.15rem 0.5rem;
+  background-color: var(--c-win-face);
+  white-space: nowrap;
+}
+
+.status-cell.flex-cell {
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   04. SECTION 1: HERO WINDOW (SINGLE TITLE + DIRECT CONNECT BUTTON)
+   -------------------------------------------------------------------------- */
+.hero-focused-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: 
+    linear-gradient(to bottom, #dcdad4 0%, #d2d0c8 100%);
+}
+
+.terminal-prompt-line {
+  font-family: var(--f-mono);
+  font-size: 0.8125rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: #000000;
+  background: var(--c-win-inset);
+  border: 2px solid var(--c-win-shadow);
+  border-right-color: var(--c-win-light);
+  border-bottom-color: var(--c-win-light);
+  padding: 0.5rem 0.85rem;
+  width: fit-content;
+}
+
+.prompt-user {
+  color: #000080;
+  font-weight: 700;
+}
+
+.prompt-cmd {
+  color: #1a6d00;
+  font-weight: 700;
+}
+
+/* Hero Single Title Box */
+.hero-single-title-box {
+  background-color: #ffffff;
+  border: 3px solid var(--c-win-shadow);
+  border-right-color: var(--c-win-light);
+  border-bottom-color: var(--c-win-light);
+  padding: 2.5rem 2.25rem;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.hero-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background-color: #000000;
+  color: var(--c-amber-glow);
+  padding: 0.25rem 0.65rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--c-amber);
+}
+
+.lamp-amber {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--c-amber-glow);
+  box-shadow: 0 0 6px var(--c-amber);
+  animation: pulseAmber 1.8s infinite;
+}
+
+@keyframes pulseAmber {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hero-single-headline {
+  font-family: var(--f-heading);
+  font-size: clamp(1.85rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: #000000;
+  letter-spacing: -0.5px;
+}
+
+/* Hero Button Row */
+.hero-cta-action-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+/* Authentic 3D Beveled Mechanical Button */
+.btn-retro-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  background-color: var(--c-titlebar-start);
+  color: #ffffff;
+  border: 3px solid #6c8cd5;
+  border-right-color: #000040;
+  border-bottom-color: #000040;
+  padding: 1.15rem 2.25rem;
+  font-family: var(--f-mono);
+  font-size: clamp(0.95rem, 2vw, 1.125rem);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  box-shadow: 3px 3px 0px #000000;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+  user-select: none;
+}
+
+.btn-retro-cta-primary:hover {
+  background-color: #0000a8;
+  color: var(--c-amber-glow);
+  border-color: #9cb5ec #000030 #000030 #9cb5ec;
+}
+
+.btn-retro-cta-primary:active {
+  border-color: #000040 #6c8cd5 #6c8cd5 #000040;
+  box-shadow: 1px 1px 0px #000000;
+  transform: translate(2px, 2px);
+}
+
+.cta-pulse-symbol {
+  color: var(--c-amber-glow);
+  font-size: 1.25rem;
+  animation: pulseIcon 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.cta-arrow {
+  color: var(--c-amber-glow);
+  font-size: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   05. SECTION 2: ABOUT ME SECTION (BIO & DOSSIER)
+   -------------------------------------------------------------------------- */
+.about-body-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: var(--c-win-face);
+}
+
+.about-identity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px dashed var(--c-win-shadow);
+}
+
+.identity-tag {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.id-symbol-box {
+  width: 48px;
+  height: 48px;
+  background-color: var(--c-titlebar-start);
+  color: #ffffff;
+  border: 2px solid var(--c-win-light);
+  border-right-color: var(--c-win-shadow);
+  border-bottom-color: var(--c-win-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--f-mono);
+  font-weight: 900;
+  font-size: 1.25rem;
+}
+
+.about-name {
+  font-family: var(--f-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #000000;
+  line-height: 1.1;
+}
+
+.about-tagline {
+  font-size: 0.8125rem;
+  color: var(--c-titlebar-start);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.id-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--c-win-inset);
+  border: 2px solid var(--c-win-shadow);
+  border-right-color: var(--c-win-light);
+  border-bottom-color: var(--c-win-light);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: #111111;
+}
+
+.lamp-emerald {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--c-emerald);
+  box-shadow: 0 0 5px var(--c-emerald);
+}
+
+.about-text-narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #1a1a1a;
+}
+
+.about-text-narrative p strong {
+  color: #000000;
+  background-color: rgba(0, 0, 128, 0.08);
+  padding: 0.1rem 0.3rem;
+  border-bottom: 1px solid var(--c-titlebar-start);
+}
+
+.about-text-narrative p em {
+  font-family: var(--f-heading);
+  font-style: italic;
+  font-weight: 600;
+  color: #000080;
+}
+
+/* Specs Grid */
+.about-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.spec-card {
+  background-color: var(--c-win-inset);
+  border: 2px solid var(--c-win-shadow);
+  border-right-color: var(--c-win-light);
+  border-bottom-color: var(--c-win-light);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.spec-label {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.75px;
+  color: var(--c-titlebar-start);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.spec-value {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #111111;
+  font-weight: 600;
+}
+
+.about-action-row {
+  margin-top: 0.5rem;
+  display: flex;
+}
+
+.btn-retro-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: var(--c-win-face);
+  color: #000000;
+  border: 2px solid var(--c-win-light);
+  border-right-color: var(--c-win-darkshadow);
+  border-bottom-color: var(--c-win-darkshadow);
+  padding: 0.75rem 1.35rem;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+}
+
+.btn-retro-secondary:hover {
+  background-color: var(--c-titlebar-start);
+  color: #ffffff;
+}
+
+.btn-retro-secondary:active {
+  border-color: var(--c-win-darkshadow) var(--c-win-light) var(--c-win-light) var(--c-win-darkshadow);
+  transform: translate(1px, 1px);
+}
+
+/* --------------------------------------------------------------------------
+   06. FOOTER: MANAGED BY HELIOS LABS + LOGO & URL
+   -------------------------------------------------------------------------- */
+.workstation-footer-window {
+  background-color: #1c212b;
+  border: 3px solid #384252;
+  border-right-color: #0e1117;
+  border-bottom-color: #0e1117;
+  box-shadow: 
+    2px 2px 0px #0e1117,
+    4px 4px 12px rgba(0, 0, 0, 0.5);
+  padding: 1.35rem 1.5rem;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.footer-brand-section {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.footer-lead-text {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 0.5px;
+}
+
+.helios-labs-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: #11141c;
+  border: 2px solid #2d3544;
+  border-right-color: #4b5563;
+  border-bottom-color: #4b5563;
+  padding: 0.4rem 0.85rem;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.helios-labs-link:hover {
+  background-color: #0b0d13;
+  border-color: #5e17e9;
+}
+
+.helios-logo-img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.helios-brand-text {
+  font-family: var(--f-heading);
+  font-weight: 800;
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.footer-meta-section {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  flex-wrap: wrap;
+}
+
+.footer-sep {
+  color: #4b5563;
+}
+
+.helios-url-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #93c5fd;
+  font-weight: 700;
+  background-color: rgba(59, 130, 246, 0.12);
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.helios-url-badge:hover {
+  color: #ffffff;
+  background-color: #2563eb;
+}
+
+.footer-copy-text {
+  color: #6b7280;
+}
+
+/* --------------------------------------------------------------------------
+   07. DIRECT CONNECT MODAL DIALOG
+   -------------------------------------------------------------------------- */
+.retro-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 15, 25, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.retro-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.retro-modal-window {
+  width: 100%;
+  max-width: 620px;
+  background-color: var(--c-win-face);
+  box-shadow: 
+    0 24px 48px rgba(0, 0, 0, 0.6),
+    8px 8px 0px rgba(0, 0, 0, 0.5);
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.retro-modal-backdrop.open .retro-modal-window {
+  transform: translateY(0) scale(1);
+}
+
+.modal-body-box {
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modal-notice-banner {
+  background-color: var(--c-win-inset);
+  border: 2px solid var(--c-win-shadow);
+  border-right-color: var(--c-win-light);
+  border-bottom-color: var(--c-win-light);
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #222222;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.modal-notice-banner i {
+  font-size: 1.15rem;
+  color: var(--c-titlebar-start);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Alert Box */
+.retro-alert-box {
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border: 2px solid #000000;
+}
+
+.retro-alert-box.success {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border-color: #2e7d32;
+}
+
+.retro-alert-box.error {
+  background-color: #ffebee;
+  color: #b71c1c;
+  border-color: #c62828;
+}
+
+/* Modal Form Grid */
+.retro-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.retro-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.retro-field-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.retro-label {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: 0.5px;
+}
+
+.retro-label .req {
+  color: var(--c-error);
+}
+
+.retro-input,
+.retro-textarea {
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid var(--c-win-shadow);
+  border-right-color: var(--c-win-light);
+  border-bottom-color: var(--c-win-light);
+  padding: 0.65rem 0.85rem;
+  font-family: var(--f-mono);
+  font-size: 0.8125rem;
+  border-radius: 0;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.retro-input:focus,
+.retro-textarea:focus {
+  outline: none;
+  background-color: #fffaea;
+  border-color: #000080;
+}
+
+.retro-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.field-error-msg {
+  font-size: 0.6875rem;
+  color: var(--c-error);
+  font-weight: 700;
+  min-height: 14px;
+}
+
+.modal-button-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btn-retro-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: var(--c-titlebar-start);
+  color: #ffffff;
+  border: 3px solid #6c8cd5;
+  border-right-color: #000040;
+  border-bottom-color: #000040;
+  padding: 0.85rem 1.75rem;
+  font-family: var(--f-mono);
+  font-size: 0.875rem;
+  font-weight: 800;
+  box-shadow: 2px 2px 0px #000000;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-retro-submit:hover {
+  background-color: #0000a8;
+  color: var(--c-amber-glow);
+}
+
+.btn-retro-submit:active {
+  border-color: #000040 #6c8cd5 #6c8cd5 #000040;
+  transform: translate(1px, 1px);
+}
+
+.btn-retro-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-retro-cancel {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--c-win-face);
+  color: #000000;
+  border: 2px solid var(--c-win-light);
+  border-right-color: var(--c-win-darkshadow);
+  border-bottom-color: var(--c-win-darkshadow);
+  padding: 0.85rem 1.35rem;
+  font-family: var(--f-mono);
+  font-size: 0.875rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-retro-cancel:hover {
+  background-color: var(--c-win-inset);
+}
+
+.btn-retro-cancel:active {
+  border-color: var(--c-win-darkshadow) var(--c-win-light) var(--c-win-light) var(--c-win-darkshadow);
+  transform: translate(1px, 1px);
+}
+
+/* --------------------------------------------------------------------------
+   08. CLASSIC WORKSTATION BOTTOM TASKBAR
+   -------------------------------------------------------------------------- */
+.workstation-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background-color: var(--c-win-face);
+  border-top: 3px solid var(--c-win-light);
+  box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
+
+.taskbar-inner {
+  max-width: var(--max-w-content);
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.btn-retro-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--c-win-face);
+  color: #000000;
+  border: 2px solid var(--c-win-light);
+  border-right-color: var(--c-win-shadow);
+  border-bottom-color: var(--c-win-shadow);
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  user-select: none;
+}
+
+.btn-retro-start:hover {
+  background-color: var(--c-titlebar-start);
+  color: #ffffff;
+}
+
+.btn-retro-start:active {
+  border-color: var(--c-win-shadow) var(--c-win-light) var(--c-win-light) var(--c-win-shadow);
+}
+
+.start-icon {
+  color: var(--c-amber);
+}
+
+.taskbar-tasks {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  overflow-x: auto;
+}
+
+.task-tab {
+  background-color: var(--c-win-face);
+  border: 2px solid var(--c-win-light);
+  border-right-color: var(--c-win-shadow);
+  border-bottom-color: var(--c-win-shadow);
+  padding: 0.3rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: #000000;
+}
+
+.task-tab.active {
+  background-color: var(--c-win-inset);
+  border-color: var(--c-win-shadow) var(--c-win-light) var(--c-win-light) var(--c-win-shadow);
+}
+
+.taskbar-tray {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: var(--c-win-inset);
+  border: 2px solid var(--c-win-shadow);
+  border-right-color: var(--c-win-light);
+  border-bottom-color: var(--c-win-light);
+  padding: 0.25rem 0.65rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+.tray-lamp {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--c-emerald);
+  box-shadow: 0 0 6px var(--c-emerald);
+}
+
+.tray-clock {
+  color: #000000;
+}
+
+/* --------------------------------------------------------------------------
+   09. RETRO TOAST POPUP
+   -------------------------------------------------------------------------- */
+.retro-toast-box {
+  position: fixed;
+  bottom: 56px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: #000000;
+  color: var(--c-amber-glow);
+  border: 2px solid var(--c-amber);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--f-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  z-index: 10001;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.7);
+  transform: translateY(20px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.retro-toast-box.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast-indicator {
+  color: var(--c-emerald);
+}
+
+/* --------------------------------------------------------------------------
+   10. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .about-spec-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .retro-window-body {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .hero-single-title-box {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .retro-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-retro-cta-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .taskbar-tasks {
+    display: none;
+  }
+
+  .modal-button-row {
+    flex-direction: column;
+  }
+
+  .btn-retro-submit,
+  .btn-retro-cancel {
+    width: 100%;
+    justify-content: center;
+  }
+}

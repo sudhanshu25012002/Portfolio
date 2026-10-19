@@ -1,0 +1,1322 @@
+/**
+ * ============================================================================
+ * 10 HERO THEME STYLES SHOWCASE STYLESHEET
+ * Sudhanshu Ranjan Portfolio Studio
+ * ============================================================================
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body.showcase-body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #0f1117;
+  color: #ffffff;
+  min-height: 100vh;
+  padding-top: 70px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* --------------------------------------------------------------------------
+   STICKY NAV BAR
+   -------------------------------------------------------------------------- */
+.showcase-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-color: rgba(15, 17, 23, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.nav-bar-inner {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  overflow-x: auto;
+}
+
+.nav-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  white-space: nowrap;
+}
+
+.badge-live {
+  background-color: #d4ff00;
+  color: #000000;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.nav-title strong {
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+}
+
+.theme-tabs-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.tab-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #9aa2b1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.tab-btn.active {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION COMMON LAYOUT
+   -------------------------------------------------------------------------- */
+.hero-theme-wrapper {
+  padding: 5rem 1.5rem 6rem;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.theme-label-strip {
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  flex-wrap: wrap;
+}
+
+.label-idx {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+
+.label-name {
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  font-size: 1rem;
+}
+
+.label-desc {
+  color: #7d8799;
+  font-size: 0.8125rem;
+}
+
+/* ==========================================================================
+   01. LINEAR / VERCEL CRAFT
+   ========================================================================== */
+.theme-linear-craft {
+  background-color: #08090a;
+}
+
+.linear-hero-card {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #0e1015;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 4.5rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.linear-ambient-light {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.linear-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+.meta-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #94a3b8;
+  background-color: rgba(255, 255, 255, 0.04);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pulse-emerald {
+  width: 7px;
+  height: 7px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.meta-tag {
+  color: #64748b;
+}
+
+.linear-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.linear-gradient-text {
+  background: linear-gradient(135deg, #94a3b8 0%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.linear-lead {
+  font-size: 1.2rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  max-width: 65ch;
+  margin-bottom: 2.5rem;
+}
+
+.linear-lead strong {
+  color: #ffffff;
+}
+
+.linear-actions-suite {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.linear-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0.85rem 1.6rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.linear-btn-primary:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.linear-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.85rem 1.4rem;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  transition: all 0.15s ease;
+}
+
+.linear-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.linear-metrics-pill {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #64748b;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ==========================================================================
+   02. APPLE STUDIO PRO
+   ========================================================================== */
+.theme-apple-studio {
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.apple-hero-card {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e5e5ea;
+  border-radius: 24px;
+  padding: 5rem 4rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+.apple-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #f5f5f7;
+  border: 1px solid #e5e5ea;
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #6e6e73;
+  margin-bottom: 2rem;
+}
+
+.apple-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #34c759;
+}
+
+.apple-headline {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: clamp(2.5rem, 5.2vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #1d1d1f;
+  margin-bottom: 1.5rem;
+}
+
+.apple-subhead {
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: #6e6e73;
+  max-width: 60ch;
+  margin-bottom: 3rem;
+}
+
+.apple-cta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.apple-btn-blue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #0071e3;
+  color: #ffffff;
+  padding: 0.95rem 1.8rem;
+  border-radius: 980px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.apple-btn-blue:hover {
+  background-color: #0077ed;
+  transform: scale(1.02);
+}
+
+.apple-btn-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+  border: 1px solid #d2d2d7;
+  padding: 0.95rem 1.6rem;
+  border-radius: 980px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.apple-btn-glass:hover {
+  background-color: #e8e8ed;
+}
+
+.apple-loc-pill {
+  margin-left: auto;
+  font-size: 0.875rem;
+  color: #86868b;
+  font-weight: 500;
+}
+
+.apple-spec-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid #e5e5ea;
+}
+
+.apple-spec-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.apple-spec-col strong {
+  font-size: 0.9375rem;
+  color: #1d1d1f;
+}
+
+.apple-spec-col span {
+  font-size: 0.8125rem;
+  color: #86868b;
+}
+
+/* ==========================================================================
+   03. STRIPE PRESS EDITORIAL
+   ========================================================================== */
+.theme-stripe-press {
+  background-color: #f7f4ed;
+  color: #1c1917;
+}
+
+.press-hero-card {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e7e3d8;
+  padding: 5rem 4.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.press-header-rule {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #1c1917;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 3.5rem;
+}
+
+.press-monogram {
+  font-weight: 700;
+}
+
+.press-headline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.5rem, 4.8vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #1c1917;
+  margin-bottom: 3rem;
+}
+
+.press-headline em {
+  font-style: italic;
+  font-weight: 600;
+  color: #d9532f;
+}
+
+.press-manifesto-columns {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.press-body-col p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #44403c;
+}
+
+.press-body-col strong {
+  color: #1c1917;
+}
+
+.press-action-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.press-btn-solid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1c1917;
+  color: #ffffff;
+  padding: 1.1rem 1.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: background-color 0.15s ease;
+}
+
+.press-btn-solid:hover {
+  background-color: #d9532f;
+}
+
+.press-btn-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f7f4ed;
+  border: 1px solid #e7e3d8;
+  padding: 1rem 1.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: #44403c;
+  transition: all 0.15s ease;
+}
+
+.press-btn-copy:hover {
+  border-color: #1c1917;
+  color: #1c1917;
+}
+
+.press-tag {
+  font-size: 0.6875rem;
+  background-color: #e7e3d8;
+  padding: 0.15rem 0.4rem;
+}
+
+/* ==========================================================================
+   04. NOTHING OS / TEENAGE ENGINEERING
+   ========================================================================== */
+.theme-nothing-os {
+  background-color: #000000;
+  background-image: radial-gradient(circle, #222222 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.nothing-hero-card {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #0a0a0a;
+  border: 2px solid #333333;
+  padding: 4.5rem 3.5rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.nothing-device-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dashed #333333;
+  margin-bottom: 2.5rem;
+  font-size: 0.75rem;
+}
+
+.nothing-status-led {
+  width: 9px;
+  height: 9px;
+  background-color: #ff0037;
+  box-shadow: 0 0 10px #ff0037;
+}
+
+.nothing-sys-tag {
+  color: #ffffff;
+}
+
+.nothing-freq {
+  margin-left: auto;
+  color: #ff0037;
+  font-weight: 700;
+}
+
+.nothing-headline {
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.nothing-desc {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: #888888;
+  margin-bottom: 3rem;
+}
+
+.nothing-controls-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.nothing-btn-red {
+  display: inline-flex;
+  align-items: center;
+  background-color: #ff0037;
+  color: #ffffff;
+  padding: 0.95rem 1.6rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: 1px solid #ff0037;
+  transition: all 0.15s ease;
+}
+
+.nothing-btn-red:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.nothing-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #444444;
+  padding: 0.95rem 1.4rem;
+  font-size: 0.8125rem;
+  transition: all 0.15s ease;
+}
+
+.nothing-btn-outline:hover {
+  border-color: #ffffff;
+}
+
+.nothing-stat-tag {
+  margin-left: auto;
+  color: #ff0037;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   05. TOKYO MIDNIGHT NOIR
+   ========================================================================== */
+.theme-tokyo-noir {
+  background-color: #060911;
+}
+
+.tokyo-hero-card {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #0b101d;
+  border: 1px solid #1a233a;
+  border-left: 4px solid #00f0ff;
+  padding: 4.5rem 3.5rem;
+  box-shadow: 0 0 50px rgba(0, 240, 255, 0.08);
+}
+
+.tokyo-telemetry-bar {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+}
+
+.tokyo-chip {
+  background-color: #12192c;
+  border: 1px solid #1e2942;
+  padding: 0.35rem 0.75rem;
+  color: #8da2c4;
+}
+
+.tokyo-chip.cyan {
+  color: #00f0ff;
+  border-color: rgba(0, 240, 255, 0.3);
+}
+
+.tokyo-chip.magenta {
+  color: #ff2a6d;
+  border-color: rgba(255, 42, 109, 0.3);
+}
+
+.tokyo-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.tokyo-neon-cyan {
+  color: #00f0ff;
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.tokyo-lead {
+  font-size: 1.2rem;
+  color: #9cb3d5;
+  line-height: 1.6;
+  max-width: 65ch;
+  margin-bottom: 3rem;
+}
+
+.tokyo-cta-group {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.tokyo-btn-cyan {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #00f0ff;
+  color: #060911;
+  padding: 1rem 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+}
+
+.tokyo-btn-cyan:hover {
+  background-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.tokyo-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #12192c;
+  color: #ffffff;
+  border: 1px solid #233152;
+  padding: 1rem 1.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.tokyo-btn-ghost:hover {
+  border-color: #00f0ff;
+  color: #00f0ff;
+}
+
+/* ==========================================================================
+   06. NORDIC WARM CERAMIC
+   ========================================================================== */
+.theme-nordic-clay {
+  background-color: #e8e4dc;
+  color: #262422;
+}
+
+.nordic-hero-card {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #f5f2ec;
+  border: 1px solid #ded9ce;
+  border-radius: 28px;
+  padding: 5rem 4rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.nordic-top-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #7a7369;
+  margin-bottom: 2.5rem;
+}
+
+.nordic-sep {
+  opacity: 0.4;
+}
+
+.nordic-headline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #262422;
+  margin-bottom: 1.5rem;
+}
+
+.nordic-body {
+  font-size: 1.25rem;
+  color: #635d54;
+  line-height: 1.65;
+  max-width: 62ch;
+  margin-bottom: 3rem;
+}
+
+.nordic-actions {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.nordic-btn-clay {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #c25e40;
+  color: #ffffff;
+  padding: 0.95rem 1.8rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.15s ease;
+}
+
+.nordic-btn-clay:hover {
+  background-color: #b05034;
+}
+
+.nordic-btn-stone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #e8e4dc;
+  color: #262422;
+  padding: 0.95rem 1.6rem;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.nordic-btn-stone:hover {
+  background-color: #ded8ce;
+}
+
+/* ==========================================================================
+   07. MODULAR BENTO STUDIO
+   ========================================================================== */
+.theme-bento-studio {
+  background-color: #0c0e14;
+}
+
+.bento-hero-grid {
+  max-width: 1100px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+}
+
+.bento-card {
+  background-color: #121620;
+  border: 1px solid #1f2738;
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.bento-card:hover {
+  border-color: #313e59;
+  transform: translateY(-2px);
+}
+
+.bento-card-main {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bento-header-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  width: fit-content;
+  margin-bottom: 2rem;
+}
+
+.dot-amber {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #f59e0b;
+}
+
+.bento-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+}
+
+.bento-summary {
+  font-size: 1.15rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.bento-btn-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.bento-btn-primary {
+  background-color: #6366f1;
+  color: #ffffff;
+  padding: 0.85rem 1.6rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.bento-btn-copy {
+  background-color: #1e2433;
+  color: #cbd5e1;
+  border: 1px solid #2e384f;
+  padding: 0.85rem 1.4rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+}
+
+.bento-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.bento-card-title i {
+  color: #6366f1;
+  font-size: 1.2rem;
+}
+
+.bento-card-spec {
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.bento-stat-num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.bento-stat-desc {
+  font-size: 0.8125rem;
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   08. BAUHAUS / SWISS COBALT
+   ========================================================================== */
+.theme-bauhaus-cobalt {
+  background-color: #f4f4f4;
+  color: #000000;
+}
+
+.bauhaus-hero-card {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #ffffff;
+  border: 3px solid #000000;
+  box-shadow: 10px 10px 0px #0045ff;
+}
+
+.bauhaus-grid-frame {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+}
+
+.bauhaus-left-block {
+  background-color: #0045ff;
+  color: #ffffff;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cobalt-stamp {
+  font-family: 'Syne', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+}
+
+.bauhaus-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.bauhaus-main-block {
+  padding: 4.5rem 3.5rem;
+}
+
+.bauhaus-headline {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+
+.cobalt-text {
+  color: #0045ff;
+}
+
+.bauhaus-statement {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #333333;
+  margin-bottom: 3rem;
+  max-width: 55ch;
+}
+
+.bauhaus-actions {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.bauhaus-btn-cobalt {
+  background-color: #0045ff;
+  color: #ffffff;
+  padding: 1.1rem 2rem;
+  font-weight: 800;
+  font-size: 1rem;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.bauhaus-btn-black {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 1.1rem 1.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   09. AURORA DARK MESH
+   ========================================================================== */
+.theme-aurora-mesh {
+  background-color: #06070a;
+}
+
+.aurora-hero-card {
+  max-width: 1100px;
+  width: 100%;
+  background: rgba(14, 17, 25, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 5rem 4rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.aurora-mesh-glow {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(99, 102, 241, 0.2) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+.aurora-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  font-size: 0.8125rem;
+  color: #e2e8f0;
+  margin-bottom: 2rem;
+}
+
+.aurora-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.aurora-headline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.aurora-gradient-text {
+  background: linear-gradient(135deg, #34d399 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aurora-desc {
+  font-size: 1.2rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  max-width: 65ch;
+  margin-bottom: 3rem;
+}
+
+.aurora-actions {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.aurora-btn-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #10b981 0%, #6366f1 100%);
+  color: #ffffff;
+  padding: 0.95rem 1.8rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+.aurora-btn-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.95rem 1.6rem;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+}
+
+/* ==========================================================================
+   10. RETRO-ARTISAN WORKSTATION
+   ========================================================================== */
+.theme-retro-workstation {
+  background-color: #2e3440;
+}
+
+.retro-window-box {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #d6d4ce;
+  border: 3px solid #ffffff;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.5);
+  font-family: 'JetBrains Mono', monospace;
+  color: #000000;
+}
+
+.retro-titlebar {
+  background: linear-gradient(to right, #000080, #1084d0);
+  color: #ffffff;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+
+.retro-window-btns {
+  display: flex;
+  gap: 4px;
+}
+
+.retro-box-btn {
+  width: 14px;
+  height: 14px;
+  background-color: #d6d4ce;
+  border: 2px outset #ffffff;
+}
+
+.retro-content-body {
+  padding: 3.5rem 3rem;
+  background-color: #d6d4ce;
+}
+
+.retro-prompt-row {
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.retro-prompt {
+  color: #000080;
+  font-weight: 700;
+}
+
+.retro-val {
+  color: #444444;
+}
+
+.retro-headline {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #000000;
+}
+
+.retro-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333333;
+  margin-bottom: 2.5rem;
+  max-width: 65ch;
+}
+
+.retro-buttons-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.retro-btn-3d {
+  background-color: #d6d4ce;
+  color: #000000;
+  border: 3px outset #ffffff;
+  padding: 0.75rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.retro-btn-3d.primary {
+  background-color: #000080;
+  color: #ffffff;
+  border-color: #4d4dff;
+}
+
+.retro-btn-3d:active {
+  border-style: inset;
+}
+
+.retro-status-tag {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #000080;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .press-manifesto-columns,
+  .bento-hero-grid,
+  .bauhaus-grid-frame {
+    grid-template-columns: 1fr;
+  }
+
+  .apple-spec-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .linear-metrics-pill,
+  .apple-loc-pill,
+  .nothing-stat-tag,
+  .retro-status-tag {
+    margin-left: 0;
+    width: 100%;
+  }
+}
